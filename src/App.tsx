@@ -9,6 +9,7 @@ import GoogleAnalyticsRouteTracker from './components/GoogleAnalyticsRouteTracke
 import LoginPage from './pages/login/ui'
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
+import BackToTop from './components/BackToTop';
 import OnboardingShellAutoPadding from './components/OnboardingShellAutoPadding';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from './theme';
@@ -403,6 +404,7 @@ function App() {
           <GoogleAnalyticsRouteTracker />
           <ScrollToTop />
           <OnboardingShellAutoPadding />
+          <BackToTop />
           <GlobalNDAGate>
             <AppLayout />
           </GlobalNDAGate>
