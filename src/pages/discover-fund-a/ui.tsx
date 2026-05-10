@@ -57,10 +57,9 @@ const FeatureCard = ({
 );
 
 const PHILOSOPHY_ICONS: Record<string, string> = {
-  "Options Intelligence": "psychology",
-  "AI-Enhanced Research": "neurology",
-  "Risk-First Architecture": "shield",
-  "Concentrated Conviction": "target",
+  "Data as an Asset": "database",
+  "AI-Enhanced Decisions": "neurology",
+  "Targeting Equilibrium": "balance",
 };
 
 const PHILOSOPHY_COLORS: Record<string, string> = {
@@ -71,10 +70,10 @@ const PHILOSOPHY_COLORS: Record<string, string> = {
 };
 
 const EDGE_ICONS: Record<string, string> = {
-  "Volatility Harvesting": "trending_up",
-  "Asymmetric Returns": "rocket_launch",
-  "Income Generation": "payments",
-  "Downside Protection": "security",
+  "Systematically Sell Premium": "payments",
+  "Maximize Decay": "hourglass_top",
+  "Maintain Delta-Neutrality": "swap_horiz",
+  "Strategic Accumulation & Income": "trending_up",
 };
 
 const EDGE_COLORS: Record<string, string> = {
