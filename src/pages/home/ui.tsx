@@ -324,7 +324,7 @@ export default function HomePage() {
 
           <footer className="pb-8">
             <p
-              className="text-[10px] text-gray-400 text-center leading-relaxed italic max-w-xs sm:max-w-lg lg:max-w-3xl mx-auto font-serif"
+              className="text-[10px] text-gray-700 text-center leading-relaxed italic max-w-xs sm:max-w-lg lg:max-w-3xl mx-auto font-serif"
               style={playfair}
             >
               Investing involves risk, including possible loss of principal. Past

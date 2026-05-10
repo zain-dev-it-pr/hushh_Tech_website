@@ -426,7 +426,7 @@ const FundA = () => {
           </section>
 
           <p
-            className="text-[9px] text-gray-400 text-center leading-relaxed italic max-w-xs sm:max-w-lg lg:max-w-3xl mx-auto pb-4"
+            className="text-[9px] text-gray-700 text-center leading-relaxed italic max-w-xs sm:max-w-lg lg:max-w-3xl mx-auto pb-4"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Investing involves risk, including possible loss of principal. Past
