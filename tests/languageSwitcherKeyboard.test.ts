@@ -7,8 +7,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const i18nMock = {
   language: "en",
+  resolvedLanguage: "en",
   changeLanguage: vi.fn((langCode: string) => {
     i18nMock.language = langCode;
+    i18nMock.resolvedLanguage = langCode;
   }),
 };
 
@@ -28,6 +30,7 @@ describe("LanguageSwitcher keyboard accessibility", () => {
     Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
 
     i18nMock.language = "en";
+    i18nMock.resolvedLanguage = "en";
     i18nMock.changeLanguage.mockClear();
     document.documentElement.removeAttribute("dir");
     document.documentElement.removeAttribute("lang");
@@ -130,5 +133,23 @@ describe("LanguageSwitcher keyboard accessibility", () => {
     expect(container.querySelector("[role='menu']")).toBeNull();
     expect(trigger.getAttribute("aria-expanded")).toBe("false");
     expect(document.activeElement).toBe(trigger);
+  });
+
+  it("keeps the correct active state for region-tagged locale codes", async () => {
+    i18nMock.language = "en-US";
+    i18nMock.resolvedLanguage = "en-US";
+
+    const trigger = await renderSwitcher();
+
+    expect(trigger.textContent).toContain("EN");
+    expect(document.documentElement.getAttribute("lang")).toBe("en");
+    expect(document.documentElement.getAttribute("dir")).toBe("ltr");
+
+    trigger.focus();
+    await keyDown(trigger, "ArrowDown");
+
+    const options = menuItems();
+    expect(options[0].getAttribute("aria-checked")).toBe("true");
+    expect(options[1].getAttribute("aria-checked")).toBe("false");
   });
 });

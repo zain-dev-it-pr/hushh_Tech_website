@@ -13,6 +13,10 @@ interface LanguageSwitcherProps {
   variant?: 'light' | 'dark';
 }
 
+function normalizeLanguageCode(language: string | undefined): string {
+  return language?.split('-')[0]?.toLowerCase() || 'en';
+}
+
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }) => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -21,11 +25,12 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
   const triggerRef = useRef<HTMLButtonElement>(null);
   const optionRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const menuId = 'language-switcher-menu';
+  const activeLanguageCode = normalizeLanguageCode(i18n.resolvedLanguage || i18n.language);
 
   // Get current language short code
-  const currentLang = languages.find(l => l.code === i18n.language)?.shortCode || 'EN';
+  const currentLang = languages.find(l => l.code === activeLanguageCode)?.shortCode || 'EN';
   const currentLangIndex = Math.max(
-    languages.findIndex((language) => language.code === i18n.language),
+    languages.findIndex((language) => language.code === activeLanguageCode),
     0
   );
 
@@ -58,18 +63,14 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
     optionRefs.current[activeIndex]?.focus();
   }, [activeIndex, isOpen]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute('dir', activeLanguageCode === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', activeLanguageCode);
+  }, [activeLanguageCode]);
+
   const changeLanguage = React.useCallback((langCode: string) => {
     i18n.changeLanguage(langCode);
-    
-    // Update document direction for RTL languages
-    if (langCode === 'ar') {
-      document.documentElement.setAttribute('dir', 'rtl');
-      document.documentElement.setAttribute('lang', 'ar');
-    } else {
-      document.documentElement.setAttribute('dir', 'ltr');
-      document.documentElement.setAttribute('lang', langCode);
-    }
-    
+
     closeDropdown(true);
   }, [closeDropdown, i18n]);
 
@@ -191,10 +192,10 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
           id={menuId}
           role="menu"
           aria-label="Language options"
-          className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-[200]"
+          className="language-dropdown absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-[200]"
         >
           {languages.map((lang, index) => {
-            const isSelected = i18n.language === lang.code;
+            const isSelected = activeLanguageCode === lang.code;
             return (
               <button
                 key={lang.code}

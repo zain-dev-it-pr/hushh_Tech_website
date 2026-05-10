@@ -27,6 +27,9 @@ vi.mock("react-i18next", () => ({
       get language() {
         return languageMock.currentLanguage;
       },
+      get resolvedLanguage() {
+        return languageMock.currentLanguage;
+      },
       changeLanguage: languageMock.changeLanguage,
     },
   }),
