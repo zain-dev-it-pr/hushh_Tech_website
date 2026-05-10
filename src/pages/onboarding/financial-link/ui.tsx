@@ -73,7 +73,7 @@ export default function OnboardingFinancialLink() {
             <br />
             <span className="text-gray-400 italic font-light">Financial Profile.</span>
           </h2>
-          <p className="text-gray-400 text-[14px] leading-relaxed max-w-[90%] font-light">
+          <p className="text-gray-500 text-[14px] leading-relaxed max-w-[90%] font-light">
             {isDone && institution
               ? `Connected to ${institution.name}. You can continue to the next step.`
               : "We'll securely check your financial profile before starting KYC verification to ensure compliance."}
@@ -233,22 +233,22 @@ export default function OnboardingFinancialLink() {
 
         {/* Trust Badges */}
         <section className="mt-auto py-12 flex flex-col items-center justify-center text-center gap-3">
-          <div className="flex items-center gap-3 opacity-60">
-            <span className="text-[10px] uppercase tracking-widest text-gray-500 font-medium">
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] uppercase tracking-widest text-gray-600 font-medium">
               PCI DSS
             </span>
-            <span className="text-[10px] text-gray-400 uppercase">
+            <span className="text-[10px] text-gray-500 uppercase font-medium">
               256 Bit Encryption
             </span>
             <div className="flex items-center gap-2 pl-2 border-l border-gray-300">
               <div className="flex -space-x-1">
-                <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-3 h-3 rounded-full bg-red-500/90" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/90" />
               </div>
-              <span className="text-[10px] font-bold text-blue-800 italic font-serif">
+              <span className="text-[10px] font-bold text-blue-900 italic font-serif">
                 Visa
               </span>
-              <span className="text-[10px] font-bold text-teal-600">
+              <span className="text-[10px] font-bold text-teal-700">
                 RuPay
               </span>
             </div>
