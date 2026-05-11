@@ -9,6 +9,7 @@
  *   />
  */
 import React from "react";
+import { motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthSession } from "../../auth/AuthSessionProvider";
 import {
@@ -46,6 +47,40 @@ type FooterTabConfig = {
   label: string;
   path: string;
 };
+
+const PROFILE_ROUTE_PREFIXES = [
+  "/profile",
+  "/hushh-user-profile",
+  "/login",
+  "/signup",
+  "/auth/",
+];
+
+function resolveActiveTabFromPath(pathname: string): HushhFooterTab | undefined {
+  const normalizedPath = pathname.toLowerCase();
+
+  if (normalizedPath === "/") {
+    return HushhFooterTab.HOME;
+  }
+
+  if (
+    normalizedPath.startsWith("/discover-fund-a") ||
+    normalizedPath.startsWith("/sell-the-wall") ||
+    normalizedPath.startsWith("/ai-powered-berkshire")
+  ) {
+    return HushhFooterTab.FUND_A;
+  }
+
+  if (normalizedPath.startsWith("/community")) {
+    return HushhFooterTab.COMMUNITY;
+  }
+
+  if (PROFILE_ROUTE_PREFIXES.some((prefix) => normalizedPath.startsWith(prefix))) {
+    return HushhFooterTab.PROFILE;
+  }
+
+  return undefined;
+}
 
 /** Fund A has a custom icon (circle with line) */
 const FundAIcon: React.FC<{ isActive: boolean }> = ({ isActive }) => {
@@ -92,7 +127,9 @@ const HushhTechFooter: React.FC<HushhTechFooterProps> = ({
     },
   ];
 
+  const routeActiveTab = resolveActiveTabFromPath(location.pathname);
   const resolvedActiveTab =
+    routeActiveTab ??
     activeTab ??
     (!isAuthenticated && isGuestAuthRoute(location.pathname)
       ? HushhFooterTab.PROFILE
@@ -126,6 +163,7 @@ const HushhTechFooter: React.FC<HushhTechFooterProps> = ({
         onClick={() => handleTabClick(tab)}
         className="flex flex-col items-center gap-1 group cursor-pointer bg-transparent border-none outline-none"
         aria-label={tab.label}
+        aria-current={isActive ? "page" : undefined}
         tabIndex={0}
       >
         {tab.id === HushhFooterTab.FUND_A ? (
@@ -147,17 +185,23 @@ const HushhTechFooter: React.FC<HushhTechFooterProps> = ({
   };
 
   return (
-    <div
+    <motion.div
+      key={location.pathname}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.22, ease: "easeOut" }}
       className={`fixed bottom-0 left-0 right-0 z-50 px-4 pb-6 pt-4 pointer-events-none ${className}`}
+      role="navigation"
+      aria-label="Bottom navigation"
     >
       <div className="relative max-w-md mx-auto pointer-events-auto">
-        <div className="h-[72px] bg-[#050505] rounded-[2rem] flex items-center px-5 relative shadow-2xl">
+        <div className="h-[72px] bg-[#050505]/96 backdrop-blur-md rounded-[2rem] flex items-center px-5 relative shadow-2xl">
           <div className="flex items-center w-full justify-between gap-2">
             {tabs.map(renderTab)}
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
