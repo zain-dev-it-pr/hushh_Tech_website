@@ -9,6 +9,108 @@ import HushhTechFooter, {
   HushhFooterTab,
 } from "../../components/hushh-tech-footer/HushhTechFooter";
 
+const CARD_ICON_CLASS = "w-[1.3rem] h-[1.3rem] text-hushh-blue";
+
+const LineIcon = ({
+  name,
+  className = CARD_ICON_CLASS,
+}: {
+  name: string;
+  className?: string;
+}) => {
+  const commonProps = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.7,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    className,
+    "aria-hidden": true,
+  };
+
+  switch (name) {
+    case "server-rack-nodes":
+      return (
+        <svg {...commonProps}>
+          <rect x="7" y="5" width="10" height="14" rx="2.5" />
+          <path d="M9.5 9h5M9.5 12h5M9.5 15h3" />
+          <circle cx="5" cy="9" r="1.25" />
+          <circle cx="19" cy="9" r="1.25" />
+          <circle cx="19" cy="15" r="1.25" />
+          <path d="M6.25 9H7M17 9h.75M17 15h.75" />
+        </svg>
+      );
+    case "binary-brain-gears":
+      return (
+        <svg {...commonProps}>
+          <path d="M9.5 7.5a3.8 3.8 0 0 0-3.8 3.8c0 1.1.47 2.08 1.21 2.77.55.52.84 1.14.84 1.84V17h4.1" />
+          <path d="M14.5 7.5a3.8 3.8 0 0 1 3.8 3.8 3.78 3.78 0 0 1-1.21 2.77c-.55.52-.84 1.14-.84 1.84V17h-2.1" />
+          <path d="M9.25 19h5.5M10.25 21h3.5" />
+          <path d="M9 10v2M8 11h2M14.8 9.4v2.2M13.7 10.5H16" />
+          <circle cx="15.8" cy="14.7" r="1.5" />
+          <path d="M15.8 12.2v.6M15.8 16.6v.6M13.3 14.7h.6M17.7 14.7h.6M14.2 13.1l.42.42M16.98 15.88l.42.42M17.4 13.1l-.42.42M14.62 15.88l-.42.42" />
+        </svg>
+      );
+    case "palm-coins":
+      return (
+        <svg {...commonProps}>
+          <path d="M5 14.5h4.5c1.3 0 2.42.92 2.67 2.2L12.5 18H9.75c-.93 0-1.83-.28-2.6-.82L5 15.7V14.5Z" />
+          <path d="M12.5 18H16a2 2 0 0 0 0-4h-3.2" />
+          <path d="M5 14.5v3.25" />
+          <circle cx="10" cy="8" r="1.2" />
+          <circle cx="14.2" cy="7" r="1.2" />
+          <circle cx="17.4" cy="9.6" r="1.2" />
+          <path d="M10 6.1v3.8M14.2 5.1v3.8M17.4 7.7v3.8" />
+        </svg>
+      );
+    case "clock-hourglass":
+      return (
+        <svg {...commonProps}>
+          <circle cx="12" cy="12" r="8.2" />
+          <path d="M9.2 8.1h5.6M9.2 15.9h5.6M10 8.1c0 1.5.72 2.38 2 3.35 1.28-.97 2-1.85 2-3.35M10 15.9c0-1.5.72-2.38 2-3.35 1.28.97 2 1.85 2 3.35" />
+        </svg>
+      );
+    case "scale-chart":
+      return (
+        <svg {...commonProps}>
+          <path d="M12 5v11M8 19h8" />
+          <path d="M7 8h10" />
+          <path d="M9.5 8 7.5 12h4L9.5 8ZM14.5 8l-2 4h4l-2-4Z" />
+          <path d="M5 18v-2.5l2-2 1.8 1.8L11 13" />
+          <path d="M13.2 11.2 15 9.4l1.8 1.8L19 8.8" />
+        </svg>
+      );
+    case "stack-coins-arrows":
+      return (
+        <svg {...commonProps}>
+          <ellipse cx="8" cy="16.5" rx="2.4" ry="1.2" />
+          <path d="M5.6 16.5v1.7c0 .66 1.07 1.2 2.4 1.2s2.4-.54 2.4-1.2v-1.7" />
+          <ellipse cx="14.8" cy="13.5" rx="2.6" ry="1.25" />
+          <path d="M12.2 13.5v3c0 .69 1.16 1.25 2.6 1.25s2.6-.56 2.6-1.25v-3" />
+          <path d="M17.8 7.5h2.7v2.7M20.5 7.5l-4.4 4.4" />
+          <path d="M6.5 10.8h2.3V8.5M8.8 10.8 4.9 14.7" />
+        </svg>
+      );
+    case "target-equilibrium":
+      return (
+        <svg {...commonProps}>
+          <circle cx="12" cy="12" r="6.5" />
+          <circle cx="12" cy="12" r="3.1" />
+          <path d="M12 3.7v2.1M12 18.2v2.1M3.7 12h2.1M18.2 12h2.1" />
+          <path d="m15.8 8.2 2.3-2.3M18.1 5.9h-2.3v2.3" />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...commonProps}>
+          <circle cx="12" cy="12" r="7" />
+          <path d="M12 8v4l2.5 2.5" />
+        </svg>
+      );
+  }
+};
+
 const FieldRow = ({
   label,
   children,
@@ -32,18 +134,14 @@ const FeatureCard = ({
   icon,
   title,
   description,
-  iconColor = "text-gray-700",
 }: {
   icon: string;
   title: string;
   description: string;
-  iconColor?: string;
 }) => (
   <div className="h-full flex items-start gap-4 border border-gray-200 rounded-2xl p-5 hover:border-gray-300 hover:bg-gray-50/50 transition-all">
     <div className="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center shrink-0 bg-white">
-      <span className={`material-symbols-outlined ${iconColor} !text-[1.15rem]`}>
-        {icon}
-      </span>
+      <LineIcon name={icon} />
     </div>
     <div className="flex-1 min-w-0">
       <h3 className="text-[13px] font-semibold text-black leading-snug mb-1">
@@ -57,31 +155,16 @@ const FeatureCard = ({
 );
 
 const PHILOSOPHY_ICONS: Record<string, string> = {
-  "Options Intelligence": "psychology",
-  "AI-Enhanced Research": "neurology",
-  "Risk-First Architecture": "shield",
-  "Concentrated Conviction": "target",
-};
-
-const PHILOSOPHY_COLORS: Record<string, string> = {
-  "Options Intelligence": "text-hushh-blue",
-  "AI-Enhanced Research": "text-hushh-blue",
-  "Risk-First Architecture": "text-ios-green",
-  "Concentrated Conviction": "text-ios-dark",
+  "Data as an Asset": "server-rack-nodes",
+  "AI-Enhanced Decisions": "binary-brain-gears",
+  "Targeting Equilibrium": "target-equilibrium",
 };
 
 const EDGE_ICONS: Record<string, string> = {
-  "Volatility Harvesting": "trending_up",
-  "Asymmetric Returns": "rocket_launch",
-  "Income Generation": "payments",
-  "Downside Protection": "security",
-};
-
-const EDGE_COLORS: Record<string, string> = {
-  "Volatility Harvesting": "text-hushh-blue",
-  "Asymmetric Returns": "text-hushh-blue",
-  "Income Generation": "text-ios-green",
-  "Downside Protection": "text-ios-green",
+  "Systematically Sell Premium": "palm-coins",
+  "Maximize Decay": "clock-hourglass",
+  "Maintain Delta-Neutrality": "scale-chart",
+  "Strategic Accumulation & Income": "stack-coins-arrows",
 };
 
 const ASSET_ICONS: Record<string, string> = {
@@ -207,7 +290,6 @@ const FundA = () => {
                   <FeatureCard
                     key={card.title}
                     icon={PHILOSOPHY_ICONS[card.title] || "lightbulb"}
-                    iconColor={PHILOSOPHY_COLORS[card.title] || "text-hushh-blue"}
                     title={card.title}
                     description={card.description}
                   />
@@ -233,7 +315,6 @@ const FundA = () => {
                   <FeatureCard
                     key={card.title}
                     icon={EDGE_ICONS[card.title] || "auto_awesome"}
-                    iconColor={EDGE_COLORS[card.title] || "text-hushh-blue"}
                     title={card.title}
                     description={card.description}
                   />
