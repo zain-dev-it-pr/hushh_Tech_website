@@ -134,14 +134,24 @@ const FeatureCard = ({
   icon,
   title,
   description,
+  iconColor = "text-hushh-blue",
+  iconVariant = "material",
 }: {
   icon: string;
   title: string;
   description: string;
+  iconColor?: string;
+  iconVariant?: "material" | "line";
 }) => (
   <div className="h-full flex items-start gap-4 border border-gray-200 rounded-2xl p-5 hover:border-gray-300 hover:bg-gray-50/50 transition-all">
     <div className="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center shrink-0 bg-white">
-      <LineIcon name={icon} />
+      {iconVariant === "line" ? (
+        <LineIcon name={icon} />
+      ) : (
+        <span className={`material-symbols-outlined ${iconColor} !text-[1.15rem]`}>
+          {icon}
+        </span>
+      )}
     </div>
     <div className="flex-1 min-w-0">
       <h3 className="text-[13px] font-semibold text-black leading-snug mb-1">
@@ -290,6 +300,7 @@ const FundA = () => {
                   <FeatureCard
                     key={card.title}
                     icon={PHILOSOPHY_ICONS[card.title] || "lightbulb"}
+                    iconVariant="line"
                     title={card.title}
                     description={card.description}
                   />
@@ -315,6 +326,7 @@ const FundA = () => {
                   <FeatureCard
                     key={card.title}
                     icon={EDGE_ICONS[card.title] || "auto_awesome"}
+                    iconVariant="line"
                     title={card.title}
                     description={card.description}
                   />
